@@ -1,0 +1,37 @@
+\chapter{Tổng quan}
+\section{Đặt vấn đề}
+Cùng với sự nghiệp Công nghiệp hóa -- Hiện đại hóa đất nước, cũng như xu thế phát triển kết nối toàn cầu của thế giới,
+con người ngày càng có thể điều khiển, sử dụng và ứng dụng nhiều hệ thống điện tử một cách tự động và mang lại hiệu quả kinh tế cao,
+đồng thời mang lại sự tiện lợi về nhiều mặt như tiết kiệm chi phí, thời gian, nâng cao bảo mật và nhiều lợi ích khác cho con người.
+Cũng chính vì xu thế này, nhận diện theo các phương pháp cũ như thẻ vật lý hoặc chìa khóa cửa vật lý ngày càng trở nên lạc hậu và bất tiện so với nhiều giải pháp nhận diện mới, vừa giải quyết được những vấn đề của phương pháp nhận diện cũ, vừa mang tính chất tự động hóa cao cũng như dễ dàng thay đổi và nâng cấp.
+
+Một trong những giải pháp nhận diện mới này là ứng dụng công nghệ RFID (Radio Frequency Identification),
+công nghệ RFID trong những năm gần đây càng ngày càng được phát triển mạnh, từ mục tiêu chủ yếu sử dụng cho quân sự, công nghiệp, nông nghiệp nói chung thì giờ đây công nghệ này đã, đang được ứng dụng mạnh mẽ trong thị trường người dùng phổ thông.
+Chính vì lẽ đó, đề tài báo cáo này dựa trên xu thế này sẽ tập trung vào nghiên cứu công nghệ RFID với mong muốn mang công nghệ đang phát triển mạnh này gần hơn với người dùng.
+
+\section{Các phương pháp đã được sử dụng trước đây}
+Trước đây, có nhiều phương pháp nhận diện vật lý đã được áp dụng rộng rãi trong thị trường công nghiệp cũng như phổ thông nói chung,
+trong đó đáng kể nhất là phương pháp nhận diện qua thẻ nhận dạng (Identification Card).
+Phương pháp này có nhiều ưu điểm: gọn gàng, dễ dàng sử dụng, dễ thay thế, v.v..
+Tuy nhiên phương pháp này, dù đã được áp dụng rộng rãi trên thị trường thương mại, có nhiều vấn đề ngày càng bộc lộ rõ hơn trong giai đoạn công nghệ phát triển mạnh ngày nay.
+Thứ nhất, phương pháp sử dụng thẻ cá nhân cần ít nhất một người quản lý để kiểm tra hiệu lực cũng như quản lý các tài khoản thẻ.
+Công việc này tốn khá nhiều thời gian, hiệu quả thấp, cũng như không mang lại sự tiện lợi cho người dùng.
+Thứ hai, những thẻ nhận dạng cá nhân này có thể bị thất lạc hoặc trộm cắp mất,
+gây ảnh hưởng đến tính bảo mật đến cả hệ thống nói chung.
+Ngoài ra, nếu xảy ra tình trạng thất lại hoặc mất cắp trên, công việc cấp lại thẻ mới cần trải qua nhiều công đoạn xác nhận lại gây ảnh hưởng đến hiệu quả của hệ thống.
+Phương pháp sử dụng chìa khóa vật lý kiểu cũ cũng có nhiều bất cập tương tự như trên.
+
+Trong giai đoạn gần đây, cũng có một vài công nghệ mới ứng dụng công nghệ quét thẻ vật lý sử dụng mã vạch hoặc QR code đã mang lại nhiều sự tiện lợi về thời gian cho người dùng,
+cắt giảm bớt đi công việc xác nhận thủ công trước đây cũng như có giá thành rẻ, dễ dàng áp dụng cho thị trường phổ thông một cách rộng rãi.
+Tuy nhiên, công nghệ mã vạch có một nhược điểm lớn là thông tin nhận dạng của thẻ hoàn toàn không được bảo mật, có thể bị hư hỏng bởi tác động vật lý dẫn đến không thể sử dụng được, và vẫn không thực sự mang lại tính tiện lợi tự nhiên (người dùng phải sử dụng camera quay theo đúng hướng và góc độ mới đọc được thẻ)
+
+\section{Nhiệm vụ của đồ án}
+Để giải quyết những vấn đề nảy sinh ra trong quá trình sử dụng các phương pháp nhận diện cũ thì báo cáo này sẽ trình bày phương pháp áp dụng công nghệ RFID mô phỏng hệ thống mở khóa cửa sử dụng Evaluation Kit EK-TM4C123G,
+chú trọng vào nhận diện cá nhân sử dụng thẻ từ cá nhân một cách tự động, nâng cao bảo mật của hệ thống cũng như tiết kiệm được thời gian cho người dùng.
+
+\section{Giới hạn thực hiện}
+Đề tài giới thiệu qua về công nghệ nhận dạng RFID nhưng không đi sâu lý thuyết cấu tạo của các thành phần của một hệ thống RFID,
+mà tập trung vào việc ứng dụng công nghệ RFID sử dụng module đọc/ghi thẻ có sẵn trên thị trường là MFRC522
+trên Evaluation Kit EK-TM4C123G. Kit TIVA C đọc dữ liệu thẻ từ qua module RFID,
+xử lý thông tin đọc được và sau đó hiển thị thông tin cho người dùng theo hai hướng là LCD1602,
+đồng thời xuất qua cổng UART để tiện lợi cho việc xử lý thông tin tự động hoặc ứng dụng thêm các module điện tử khác, nâng cao hiệu quả của hệ thống nhận diện.
