@@ -1,0 +1,202 @@
+\documentclass[12pt, a4paper, oneside]{book}
+
+%----- ALL THE JUICY PACKAGES -----%
+\usepackage[T5]{fontenc} % Make it possible to copy accented characters from ouput files
+% Since this is a Vietnamese document so I am using T5 here, if you are writing a pure English or whatever change it to T1
+% Read more: https://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm, includeheadfoot]{geometry} % Set margin
+\usepackage[utf8]{vntex} % VnTex is really good for Vietnamese document
+\usepackage{mathptmx} % About the same as Times New Roman font
+\usepackage{indentfirst} % Indent the first paragraph of sections
+\usepackage{fancyhdr} % For fancy headers and footers
+\usepackage{graphicx} % Enhanced support for graphics (DRAW STUFF)
+\usepackage{authoraftertitle} % for reciting author/title in the documents
+\usepackage{tikz} % Create PostSscript and PDF graphics (DRAW MORE STUFF)
+\usepackage{setspace} % Set custom space between lines
+\usepackage[unicode, hidelinks]{hyperref} % Hypertext support, useful for making bookmarks and click-able hyperlinks
+\usepackage[perpage]{footmisc} % Footnote restart everypage
+\usepackage{amsmath} % Nice math package
+\usepackage{siunitx} % Handles basically all of the SI Units stuff
+\usepackage{booktabs} % Beautify tables/tabular/tableau
+\usepackage{enumitem} % Less spacing between items in itemize list, also can use a new env enumerate
+\usepackage{longtable} % longtable, able to span multiples pages
+\usepackage{multirow} % Multirow for tables
+\usepackage{minted} % Code highlighting
+
+% Bibliography management: by default LaTeX uses Biblatex which werks (with an e)
+% but if you cite documents with non-ascii stuff in it (or want to customize bibiography)
+% then it's highly recommended to use biber backend
+\usepackage[backend=biber, style=ieee, maxbibnames=3, minbibnames=1]{biblatex}
+%\AtEveryBibitem{\printfield{labelnumber}.\addspace} % Numbers in the bib, use with authoryear or whatever
+
+%----- CUSTOM COMMANDS -----
+\setcounter{secnumdepth}{4} % This will number the subsubsection
+%\setcounter{tocdepth}{4} % This will add subsubsection line to TOC
+\renewcommand{\thesubsubsection}{\alph{subsubsection})} % Use a) b) c) in subsubsection
+%\renewcommand{\arraystretch}{1.2} % More space between table lines
+
+%----- SUB-SETTINGS PACKAGES AND GENERAL PAGES -----%
+\usetikzlibrary{calc} % For calculating space to draw stuff
+\usetikzlibrary{arrows, positioning, fit, shapes.geometric} % stuff needed for block diagram
+\onehalfspacing % From setspace package
+\addbibresource{uni.bib} % This is for biblatex
+\setlength{\headheight}{20pt} % vertical associated with header of the page (fancyhdr)
+\setlist{nosep} % This is used with enumitem package, less space separator between items in lists/enums
+
+%----- SETTINGS FOR HEADERS AND FOOTERS -----%
+% Read more: https://en.wikibooks.org/wiki/LaTeX/Customizing_Page_Headers_and_Footers
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Đồ án môn học - \csCompileTime}
+\rhead{GVHD: TS. Trương Quang Vinh}
+\cfoot{\thepage}
+
+%----- SETTINGS FOR CONSTANTS COUNCILS + COMPILE TIME -----%
+\newcommand{\csdeptname}{KHOA ĐIỆN ĐIỆN TỬ}
+\newcommand{\csCouncil}{Khoa Điện Điện tử}
+\newcommand{\csSupervise}{TS. Trương Quang Vinh}
+\newcommand{\csReviewer}{TS. Nguyễn Văn A}
+\newcommand{\crname}{BÁO CÁO ĐỒ ÁN MÔN HỌC} % Thesis, report, whatever
+\newcommand{\csCompileTime}{12/2019}
+
+%----- SUB-SETTINGS FOR STUDENT NAMES -----%
+\newcommand{\csSVone}{Rudo}
+\newcommand{\csidSVone}{123456}
+%\newcommand{\csSVtwo}{Rudo2204}
+%\newcommand{\csidSVtwo}{123456}
+
+%----- BEGIN FRONTMATTER -----%
+\begin{document}
+\frontmatter
+
+%----- BEGIN TITLEPAGE -----%
+\newgeometry{top=2cm, bottom=3cm, left=3cm, right=2cm}
+\begin{titlepage}
+%----- DRAWING BORDERS OF TITLEPAGE -----%
+\begin{tikzpicture}[remember picture, overlay]
+\draw [line width=1pt]
+    ($ (current page.north west) + (3.15cm,-2.15cm) $)
+    rectangle
+    ($ (current page.south east) + (-2.15cm,2.15cm) $);
+\draw [line width=3pt]
+    ($ (current page.north west) + (3cm,-2cm) $)
+    rectangle
+    ($ (current page.south east) + (-2cm,2cm) $);
+\end{tikzpicture}
+
+%----- TYPESETTINGS INFORMATION OF TITLEPAGE -----%
+\begin{center}
+\begin{large}
+ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH\\
+TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
+\csdeptname\\
+\end{large}
+\textbf{--------------------  *  ---------------------}\\[1.2cm]
+\includegraphics[scale=0.25]{images/LogoBK.png}\\[1.2cm]
+{\fontsize{15}{1}\selectfont \crname }\\[0.8cm]
+
+%----- TYPESETTINGS INFORMATION OF TITLE -----%
+{\fontsize{24}{1}\selectfont \textbf{ỨNG DỤNG RFID MỞ KHÓA CỬA\\SỬ DỤNG EVALUATION KIT EK-TM4C123G}}\\[2.3cm]
+\end{center}
+
+%----- TYPESETTINGS INFORMATION OF COUNCIL -----%
+\begin{flushright}
+    \begin{minipage}{0.6\textwidth}
+        \large
+        \textbf{HỘI ĐỒNG:} \csCouncil\\[0.1cm]
+        \textbf{GVHD:} \csSupervise\\[0.1cm]
+        %\textbf{GVPB:} \csReviewer\\[0.5cm]
+        \textbf{SVTH:} \csSVone{} (\csidSVone)
+        %\textbf{SVTH 2:} \csSVtwo{} (\csidSVtwo)
+    \end{minipage}
+\end{flushright}
+
+% ALTERNATIVE FOR MULTIPLE STUDENT NAMES - GROUP (BTL)
+%----- TYPESETTINGS INFORMATION OF COUNCIL -----%
+%\begin{flushright}
+%    \begin{minipage}{0.6\textwidth}
+%        \large
+%        \textbf{GVHD}: TS. Nguyễn Văn A\\[0.2cm]
+%        \textbf{Nhóm 18}: \\[0.1cm]
+%        \csSVone{} -- \csidSVone\\
+%        \csSVtwo{} -- \csidSVtwo\\
+%        \csSVthree{} -- \csidSVthree\\
+%        \csSVfour{} -- \csidSVfour\\
+%        \csSVfive{} -- \csidSVfive\\
+%        \csSVsix{} -- \csidSVsix\\
+%    \end{minipage}
+%\end{flushright}
+
+%----- TYPESETTINGS INFORMATION OF COUNCIL -----%
+\begin{center}
+\vfill
+{\fontsize{14}{1}\selectfont TP. HỒ CHÍ MINH, \csCompileTime}
+\end{center}
+
+\end{titlepage}
+\restoregeometry
+
+%----- CREATE AN EMPTY "INTENTIONALLY LEFT BLANK PAGE" -----%
+% Use this to create an empty page without anything: \shipout\null
+% Read more: https://tex.stackexchange.com/questions/340065/insert-extra-blank-pages-after-title
+% Note: This may fuck up page numbering in a few pdf reader and will make it very hard for you to print
+% Either use PDF-shuffler or whatever to split the pdf or just remove this
+\thispagestyle{empty}
+\clearpage
+\begin{center}
+\vspace*{3cm}
+\large\emph{Trang này được bỏ trống}
+\vspace*{\fill}
+\end{center}
+\addtocounter{page}{-1}
+
+%----- BEGIN DECLARATION (LOI CAM KET) -----%
+%\input{frontmatter/declaration.tex}
+
+%----- BEGIN THANKS (LOI CAM ON) -----%
+\input{frontmatter/thanks.tex}
+
+%----- BEGIN ABSTRACT (TOM TAT) -----%
+\input{frontmatter/abstract.tex}
+
+%----- BEGIN TOC, TOF, LOT -----%
+\input{frontmatter/toc_tof_lot.tex}
+
+%----- BEGIN MAIN MATTER -----%
+\mainmatter
+\include{content/ch1-introduction}
+\include{content/ch2-cslt}
+\include{content/ch3-ketqua}
+
+\backmatter
+\phantomsection
+\addcontentsline{toc}{chapter}{Tài liệu tham khảo}
+\nocite{*} % Basically don't cite anything but print all of the stuff in bibliography file out
+\emergencystretch=1em
+\printbibliography[title=Tài liệu tham khảo]
+% This is the default way to handle bibliography
+%\bibliographystyle{ieeetr}
+%\bibliography{uni}
+
+%----- APPENDIX (PHU LUC) -----
+% Detailed schematic, extra information, source code and other shit are put in here
+\appendix
+\chapter*{Phụ lục}
+\addcontentsline{toc}{chapter}{Phụ lục}
+% IMPORTANT: These have to be here, cannot put above else it would mess up the content in mainmatter
+\renewcommand{\thesection}{\Alph{section}}
+%\setminted[c]{linenos, breaklines, breakanywhere, fontsize=\footnotesize]
+\section{Source code của hệ thống}
+\subsection{Thư viện MFRC522}
+\subsubsection{File header}
+\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{cpp}{code/Mfrc522.h}
+\subsubsection{File thư viện}
+\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize, encoding=utf8]{cpp}{code/Mfrc522.cpp}
+\subsection{Thư viện LCD}
+\subsubsection{File header}
+\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/lcd.h}
+\subsubsection{File thư viện}
+\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/lcd.c}
+\subsection{File main}
+\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/main.c}
+\end{document}
