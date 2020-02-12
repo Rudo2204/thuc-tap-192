@@ -16,6 +16,7 @@ env:
 
 # TODO: Update the following to install extra dependencies if needed
 before_install:
+  - sudo apt-get install biber
   - sudo apt-get install python-pygments # If you use the minted package
 # - sudo apt-get install ghostscript # If you use latex > dvips > ps2pdf
 ## If you use custom fonts:
