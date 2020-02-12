@@ -2,6 +2,8 @@
 # - https://github.com/PHPirates/travis-ci-latex-pdf#tectonic-docker
 # - https://github.com/japaric/trust
 # - https://malramsay.com/post/compiling_latex_on_travis/
+
+dist: bionic
 sudo: required
 language: generic
 services: docker
@@ -12,17 +14,45 @@ env:
     # we can also specify datetime of the compiled document in by using before_deploy.sh
     - PDF_NAME=Rudo2204_thesis
 
-script:
-# We use the docker image from https://hub.docker.com/r/dxjoke/tectonic-docker/
-# TODO: Change the following to compile the correct file(s)
-  # Compiling without biber use this
-  #- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic main.tex"
-  # Compile WITH biber use this
- - docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic --keep-intermediates --reruns 0 main.tex; biber main; tectonic main.tex"
-  # Compiling multiple files as well as using biber:
-#  - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic --keep-intermediates --reruns 0 biber-mwe.tex; biber biber-mwe; tectonic biber-mwe.tex; tectonic main.tex"
+# TODO: Update the following to install extra dependencies if needed
+before_install:
+  - set -e
+  - sudo apt-get install python-pygments # If you use the minted package
+# - sudo apt-get install ghostscript # If you use latex > dvips > ps2pdf
+## If you use custom fonts:
+# - mkdir $HOME/.fonts
+# - cp -a $TRAVIS_BUILD_DIR/src/fonts/. $HOME/.fonts/
+# - fc-cache -f -v
 
-after_script: set +e
+install:
+  - sh ci/texlive/texlive_install.sh
+
+script:
+# TODO: Change the following to compile the correct file(s)
+  # Texliveonfly will download packages automatically
+  # - texliveonfly main.tex
+  - texliveonfly --arguments='-shell-escape -file-line-error -verbose -synctex=1 -interaction=nonstopmode' main.tex
+  # You can use latexmk to automatically handle bibtex and references (recommended)
+  - latexmk -pdf main.tex
+
+  # But you could use any other compiler as well instead of latexmk. Example:
+#  - pdflatex main.tex
+#  - bibtex main
+#  - pdflatex main.tex
+#  - pdflatex main.tex # Compile twice to fix references
+
+  # You can also pass arguments to texliveonfly:
+#  - texliveonfly --arguments='-shell-escape' main.tex
+
+## Uncomment the following lines to see the packages installed in travis
+#  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+#  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
+
+after_script:
+  - set +e
+## Uncomment the following lines to see the packages installed in travis
+  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
+  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
 
 before_deploy:
   - sh ci/before_deploy.sh
@@ -41,6 +71,16 @@ deploy:
     tags: true
   provider: releases
   skip_cleanup: true
+
+before_cache:
+  # Travis can't cache files that are not readable by "others"
+  - chmod -R a+r $HOME/.texlive
+  - chmod -R a+r /tmp/texlive
+
+cache:
+  directories:
+    - /tmp/texlive
+    - $HOME/.texlive
 
 branches:
   only:
