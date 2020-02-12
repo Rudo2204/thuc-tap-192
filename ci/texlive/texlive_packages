@@ -5,7 +5,8 @@
 # Base tools to compile
 texliveonfly latexmk biber
 
-# TODO: Add all the packages you use in here
+# Add all the packages you use in here to speed up
+# first time complication process
 quotes
 tools
 vntex
