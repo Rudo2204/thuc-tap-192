@@ -18,6 +18,7 @@ booktabs
 enumitem
 multirow
 biblatex
+biblatex-ieee
 # minted is not here, because it's added below
 
 # Collections
