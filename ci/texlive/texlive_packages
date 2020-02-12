@@ -6,24 +6,16 @@
 texliveonfly latexmk
 
 # TODO: Add all the packages you use in here
-book
-fontenc
-geometry
+quotes
+tools
 vntex
-mathptmx
-indentfirst
-fancyhdr
-graphicx
-authoraftertitle
-tikz
-setspace
-hyperref
+newtx
+pgf
+tikz-cd
 footmisc
-amsmath
 siunitx
 booktabs
 enumitem
-longtable
 multirow
 biblatex
 # minted is not here, because it's added below
