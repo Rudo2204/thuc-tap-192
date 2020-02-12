@@ -10,18 +10,18 @@ if ! command -v texlua > /dev/null; then
   cd install-tl-20*
 
   # Install a minimal system
-  sudo ./install-tl --profile=../ci/texlive/texlive.profile
+  ./install-tl --profile=../ci/texlive/texlive.profile
 
   cd ..
 fi
 
 # Just including texlua so the cache check above works
 # Needed for any use of texlua even if not testing LuaTeX
-sudo tlmgr install luatex
+tlmgr install luatex
 
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # We specify the directory in which it is located texlive_packages
-sudo tlmgr install $(sed 's/\s*#.*//;/^\s*$/d' ci/texlive/texlive_packages)
+tlmgr install $(sed 's/\s*#.*//;/^\s*$/d' ci/texlive/texlive_packages)
 
 # Can also just specify like the following
 # texlive-latex-base is needed to run pdflatex
@@ -32,7 +32,7 @@ sudo tlmgr install $(sed 's/\s*#.*//;/^\s*$/d' ci/texlive/texlive_packages)
 #  amsmath
 
 # Keep no backups (not required, simply makes cache bigger)
-sudo tlmgr option -- autobackup 0
+tlmgr option -- autobackup 0
 
 # Update the TL install but add nothing new
-sudo tlmgr update --self --all --no-auto-install
+tlmgr update --self --all --no-auto-install
