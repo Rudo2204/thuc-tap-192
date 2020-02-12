@@ -30,23 +30,11 @@ install:
 script:
 # TODO: Change the following to compile the correct file(s)
   # Texliveonfly will download packages automatically
-  # - texliveonfly main.tex
-  - texliveonfly --arguments='-shell-escape' main.tex
   # You can use latexmk to automatically handle bibtex and references (recommended)
-  - latexmk -pdf main.tex
+  - texliveonfly --compiler=latexmk --arguments='-pdf -shell-escape -synctex=1 -interaction=nonstopmode' main.tex
 
-  # But you could use any other compiler as well instead of latexmk. Example:
-#  - pdflatex main.tex
-#  - bibtex main
-#  - pdflatex main.tex
-#  - pdflatex main.tex # Compile twice to fix references
-
-  # You can also pass arguments to texliveonfly:
-#  - texliveonfly --arguments='-shell-escape' main.tex
-
-## Uncomment the following lines to see the packages installed in travis
-#  - export PATH=/tmp/texlive/bin/x86_64-linux:$PATH
-#  - tlmgr list --only-installed | grep -oP 'i \K.+?(?=:)'
+  # But you could use any other compiler (pdflatex, bibtex, pdflatex - have to do 2 times)
+  # as well instead of latexmk.
 
 after_script:
   - set +e
