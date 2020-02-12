@@ -17,8 +17,9 @@ env:
 # TODO: Update the following to install extra dependencies if needed
 before_install:
   - set -e
+  - sudo apt-get install texlive-extra-utils
   - sudo apt-get install python-pygments # If you use the minted package
-# - sudo apt-get install ghostscript # If you use latex > dvips > ps2pdf
+# - sudo apt install ghostscript # If you use latex > dvips > ps2pdf
 ## If you use custom fonts:
 # - mkdir $HOME/.fonts
 # - cp -a $TRAVIS_BUILD_DIR/src/fonts/. $HOME/.fonts/
@@ -31,7 +32,7 @@ script:
 # TODO: Change the following to compile the correct file(s)
   # Texliveonfly will download packages automatically
   # You can use latexmk to automatically handle bibtex and references (recommended)
-  - texliveonfly --compiler=latexmk --arguments='-pdf -shell-escape -synctex=1 -interaction=nonstopmode' main.tex
+  - sudo texliveonfly --compiler=latexmk --arguments='-pdf -shell-escape -synctex=1 -interaction=nonstopmode' main.tex
 
   # But you could use any other compiler (pdflatex, bibtex, pdflatex - have to do 2 times)
   # as well instead of latexmk.
