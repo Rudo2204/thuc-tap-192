@@ -22,6 +22,9 @@ The style is heavily based on [my school's official writing guidelines for these
 - Your repo must be accessible by Travis CI.
 
 ## How-to
+### Test build the document locally
+1. Install the latex packages: `texlive-latex-extra, texlive-science, texlive-language-other, biber, latexmk, texlive-bibtex-extra, python-pygments`
+2. Compile them with `latexmk -pdf -shell-escape -bibtex -synctex=1 -interaction=nonstopmode main.tex`
 ### Use this template
 1. Fork or clone the repo and rewrite the thesis contents.
 2. Edit the information in the CI files marked with `TODO`, they will tell you what and how you edit them.
