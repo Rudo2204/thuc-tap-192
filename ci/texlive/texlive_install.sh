@@ -10,7 +10,7 @@ if ! command -v texlua > /dev/null; then
   cd install-tl-20*
 
   # Install a minimal system
-  ./install-tl --profile=../texlive/texlive.profile
+  ./install-tl --profile=../ci/texlive/texlive.profile
 
   cd ..
 fi
@@ -21,7 +21,7 @@ tlmgr install luatex
 
 # Other contrib packages: done as a block to avoid multiple calls to tlmgr
 # We specify the directory in which it is located texlive_packages
-tlmgr install $(sed 's/\s*#.*//;/^\s*$/d' texlive/texlive_packages)
+tlmgr install $(sed 's/\s*#.*//;/^\s*$/d' ci/texlive/texlive_packages)
 
 # Can also just specify like the following
 # texlive-latex-base is needed to run pdflatex
