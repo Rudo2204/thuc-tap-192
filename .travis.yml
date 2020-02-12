@@ -31,7 +31,7 @@ script:
 # TODO: Change the following to compile the correct file(s)
   # Texliveonfly will download packages automatically
   # - texliveonfly main.tex
-  - texliveonfly --arguments='-shell-escape -file-line-error -verbose -synctex=1 -interaction=nonstopmode' main.tex
+  - texliveonfly --arguments='-shell-escape' main.tex
   # You can use latexmk to automatically handle bibtex and references (recommended)
   - latexmk -pdf main.tex
 
