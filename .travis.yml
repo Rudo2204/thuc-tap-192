@@ -44,9 +44,9 @@ deploy:
   # - Encrypt it: `travis encrypt 0123456789012345678901234567890123456789 --pro`
   # - Paste the output down here
   api_key:
-    secure: A9v3PIzQQ4U08OHFmDPQzNXbNHEb7YHyLXCvMF+dXFuNSvhUNlmQYykxqUf3dvikhJL2/bsZ14umm7ni7fQh0tGwJ4+lPpNzYAcweGgNXnWvjTpY6ovuRbr3gs4/srkyxp/GBDmSW5L8wFN3hKCB+Lm0YnIPB9IA2afP8a30+8VTXT9nv7pNqGny4ilN41ycr4DZi3sQoXdbruy7ClN7gsWW/GUiudBccHVIjmTapOFKLwZHODaUl/1/RDWQzh+i+17e1ivXuJPktDSrqmHPTZ15OjklnHKd6t179ry6VkGRg4R/R/YukVIqGzeaXGWAwdAQ5gE8cjGZghJLVi2jkDBJ85z8MvT+zLZLyliiuhLc/X8y7mkE1n0FKFtXXzFVt0l7V1LaEKbIbiV6XX3jsir4qgkqWjPHBZqO5mkGNFS16Dmt30/ZtEPAzXiINFXbWuWrpQ/LZ4NSto8IMrRTcoyDbAga/KYxJiNIeVuCe1E9dbytDM7K0GLtxJTul/WnnSeI6r//EFyC4bxYjyHhCXaag4q14KM+ak4rB0QgxsYzyGuh2MqyCoVj8YJLjLdKnL/SV7W7LPD40xlxvI6VCYTVi2ILHwL6vCxpukXYteX0c5IAIWkISDKu6nNBEgmCHXXPSqYSrgE5g7/QoCQHI8++nR8iKe0s7TWxZRydby8=
+    secure: "ZC9nljgWk4TZG+TOmO5o5hcitZG5gFyWOZCKqWc9qNad/VYqDc56qtfksumHuH7Xz5SmVS19jAbmV67irAP1pmf2dnxfuaKHN9VKfQjacrKfevnOGLSEvxVJ83dyV5XHsopqDv8fAUz0M0hsmA/77GGhB7udTn4RL+YKPRLjv59NWvaUEjudRIyx2setzPqQcQrMzKTlXAsFsvmCCGSWaY5gT4PVDFXoK6BzWzykR72GPqBL6q97b389SfcICiEYngZrQZ4h8rPAjQZku1lFYGU4kMefO7S797SXoZvVtycXJvb6+MgHlP0TFHVXZtFoMfq96ocWwbXQut7mtM53Rcg1Eh4EbY8vUNTH0guOkJI/8Ph2KXdijqGM7Ew3Iu3bxsJCQaNvPv3jCmPnl9wmZf8SHN9c4aVfL432GgZQuhNeqXi0VRgDvm1BPd7ja1Fe0v2HZVKGGqha2EIqhTJJmShaRt0KA+dtKJEa5Drl+73A0y5tka3Is+I+PZ4RtYdMG1zvlsHE6WSKtb7dFoOAVbfonWvNx/RoUWKe72wwoRhQzGzJju+q0DJxSoxBir0WiFP+4GcVpMtWA15tgYp7r/IpRjlevoGo1WzshLQz1jI8pV+sl43edv3l31RqyqblohlVgRiHIgewBq3Q3gC5Aw/VgBpk0KH4Y+88ezDDTx4="
   # TODO: Make change here to deploy the right artifacts
-  fileglob: true
+  file_glob: true
   file:
     - ./*.pdf
     - ./*.7z
