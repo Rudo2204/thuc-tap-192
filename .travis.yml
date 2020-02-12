@@ -30,7 +30,7 @@ script:
 # TODO: Change the following to compile the correct file(s)
   # Texliveonfly will download packages automatically
   # You can use latexmk to automatically handle bibtex and references (recommended)
-  - texliveonfly --compiler=latexmk --arguments='-pdf -shell-escape -synctex=1 -interaction=nonstopmode' main.tex
+  - texliveonfly --compiler=latexmk --arguments='-pdf -bibtex -shell-escape -synctex=1 -interaction=nonstopmode' main.tex
 
   # But you could use any other compiler (pdflatex, bibtex, pdflatex - have to do 2 times)
   # as well instead of latexmk.
