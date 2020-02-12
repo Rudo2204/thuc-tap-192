@@ -1,5 +1,5 @@
 # thesis-template
-> LaTeX masterrace!
+> Oh boy my thesis looks so freaking good!
 
 Travis CI Build: [![Build Status](https://travis-ci.com/Rudo2204/thesis-template.svg?branch=master)](https://travis-ci.com/Rudo2204/thesis-template)\
 License: [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -15,12 +15,11 @@ The style is heavily based on [my school's official writing guidelines for these
 - Code highlighting with `minted` package.
 - Bibliography handled by `biber` (best practice) with IEEE style.
 - Appendices for source code, additional information, ect.
-- Automatically archive project material, compile and build the LaTeX document and deploy them to github using Travis CI.
+- Automatically archive project material, compile, build the LaTeX document and deploy to Github using Travis CI.
 
 ## Requirements
 - A [Travis CI](https://travis-ci.com/) account (free for open sourced repos)
 - Your repo must be accessible by Travis CI.
-- You know how to edit basic information and can use `git`.
 
 ## How-to
 ### Use this template
