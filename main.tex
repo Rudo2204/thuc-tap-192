@@ -12,7 +12,7 @@
 \usepackage{graphicx} % Enhanced support for graphics (DRAW STUFF)
 \usepackage{tikz} % Create PostSscript and PDF graphics (DRAW MORE STUFF)
 \usepackage{setspace} % Set custom space between lines
-\usepackage[unicode, hidelinks]{hyperref} % Hypertext support, useful for making bookmarks and click-able hyperlinks
+\usepackage[unicode]{hyperref} % Hypertext support, useful for making bookmarks and click-able hyperlinks
 \usepackage[perpage]{footmisc} % Footnote restart everypage
 \usepackage{amsmath} % Nice math package
 \usepackage{siunitx} % Handles basically all of the SI Units stuff
@@ -21,6 +21,8 @@
 \usepackage{longtable} % longtable, able to span multiples pages
 \usepackage{multirow} % Multirow for tables
 \usepackage{minted} % Code highlighting
+\usepackage{multido}
+\usepackage{./custom_package/dirtree/dirtree}
 
 % Bibliography management: by default LaTeX uses Biblatex which werks (with an e)
 % but if you cite documents with non-ascii stuff in it (or want to customize bibiography)
@@ -33,6 +35,16 @@
 %\setcounter{tocdepth}{4} % This will add subsubsection line to TOC
 \renewcommand{\thesubsubsection}{\alph{subsubsection})} % Use a) b) c) in subsubsection
 %\renewcommand{\arraystretch}{1.2} % More space between table lines
+% See: https://tex.stackexchange.com/questions/248451/how-to-create-multiple-dotted-lines
+\newcommand{\Pointilles}[1]{%
+  \par\nobreak
+  \noindent\rule{0pt}{1.5\baselineskip}% Provides a larger gap between the preceding paragraph and the dots
+  \multido{}{#1}{\noindent\makebox[\linewidth]{\dotfill}\endgraf}% ... dotted lines ...
+  \bigskip% Gap between dots and next paragraph
+}
+\renewcommand\listingscaption{Ví dụ}
+\renewcommand\listoflistingscaption{Danh sách ví dụ}
+\newminted[ccode]{c}{frame=lines, linenos, breaklines, breakanywhere, fontsize=\footnotesize} % format rust code
 
 %----- SUB-SETTINGS PACKAGES AND GENERAL PAGES -----%
 \usetikzlibrary{calc} % For calculating space to draw stuff
@@ -46,21 +58,22 @@
 % Read more: https://en.wikibooks.org/wiki/LaTeX/Customizing_Page_Headers_and_Footers
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{Đồ án môn học - \csCompileTime}
+\lhead{Thực tập tốt nghiệp - \csCompileTime}
 \rhead{GVHD: TS. Trương Quang Vinh}
 \cfoot{\thepage}
 
 %----- SETTINGS FOR CONSTANTS COUNCILS + COMPILE TIME -----%
 \newcommand{\csdeptname}{KHOA ĐIỆN ĐIỆN TỬ}
 \newcommand{\csCouncil}{Khoa Điện Điện tử}
+\newcommand{\csCty}{Công ty TNHH 3D Sao Vàng}
 \newcommand{\csSupervise}{TS. Trương Quang Vinh}
 \newcommand{\csReviewer}{TS. Nguyễn Văn A}
-\newcommand{\crname}{BÁO CÁO ĐỒ ÁN MÔN HỌC} % Thesis, report, whatever
-\newcommand{\csCompileTime}{12/2019}
+\newcommand{\crname}{BÁO CÁO THỰC TẬP TỐT NGHIỆP} % Thesis, report, whatever
+\newcommand{\csCompileTime}{07/2020}
 
 %----- SUB-SETTINGS FOR STUDENT NAMES -----%
-\newcommand{\csSVone}{Rudo}
-\newcommand{\csidSVone}{123456}
+\newcommand{\csSVone}{Vũ Đăng Khoa}
+\newcommand{\csidSVone}{1611645}
 %\newcommand{\csSVtwo}{Rudo2204}
 %\newcommand{\csidSVtwo}{123456}
 
@@ -92,17 +105,18 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 \end{large}
 \textbf{--------------------  *  ---------------------}\\[1.2cm]
 \includegraphics[scale=0.25]{images/LogoBK.png}\\[1.2cm]
-{\fontsize{15}{1}\selectfont \crname }\\[0.8cm]
+%{\fontsize{15}{1}\selectfont \crname }\\[0.8cm]
 
 %----- TYPESETTINGS INFORMATION OF TITLE -----%
-{\fontsize{24}{1}\selectfont \textbf{ỨNG DỤNG RFID MỞ KHÓA CỬA\\SỬ DỤNG EVALUATION KIT EK-TM4C123G}}\\[2.3cm]
+{\fontsize{24}{1}\selectfont \textbf{BÁO CÁO\\THỰC TẬP TỐT NGHIỆP}}\\[6.3cm]
 \end{center}
 
 %----- TYPESETTINGS INFORMATION OF COUNCIL -----%
 \begin{flushright}
     \begin{minipage}{0.6\textwidth}
         \large
-        \textbf{HỘI ĐỒNG:} \csCouncil\\[0.1cm]
+        %\textbf{HỘI ĐỒNG:} \csCouncil\\[0.1cm]
+        \textbf{Đơn vị:} \csCty\\[0.1cm]
         \textbf{GVHD:} \csSupervise\\[0.1cm]
         %\textbf{GVPB:} \csReviewer\\[0.5cm]
         \textbf{SVTH:} \csSVone{} (\csidSVone)
@@ -152,11 +166,14 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 %----- BEGIN DECLARATION (LOI CAM KET) -----%
 %\input{frontmatter/declaration.tex}
 
+%----- BEGIN COMMENT (LOI NHAN XET) -----%
+\input{frontmatter/comment.tex}
+
 %----- BEGIN THANKS (LOI CAM ON) -----%
 \input{frontmatter/thanks.tex}
 
 %----- BEGIN ABSTRACT (TOM TAT) -----%
-\input{frontmatter/abstract.tex}
+%\input{frontmatter/abstract.tex}
 
 %----- BEGIN TOC, TOF, LOT -----%
 \input{frontmatter/toc_tof_lot.tex}
@@ -164,8 +181,8 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 %----- BEGIN MAIN MATTER -----%
 \mainmatter
 \include{content/ch1-introduction}
-\include{content/ch2-cslt}
-\include{content/ch3-ketqua}
+\include{content/ch2-content}
+%\include{content/ch3-ketqua}
 
 \backmatter
 \phantomsection
@@ -179,23 +196,23 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 
 %----- APPENDIX (PHU LUC) -----
 % Detailed schematic, extra information, source code and other shit are put in here
-\appendix
-\chapter*{Phụ lục}
-\addcontentsline{toc}{chapter}{Phụ lục}
-% IMPORTANT: These have to be here, cannot put above else it would mess up the content in mainmatter
-\renewcommand{\thesection}{\Alph{section}}
-%\setminted[c]{linenos, breaklines, breakanywhere, fontsize=\footnotesize]
-\section{Source code của hệ thống}
-\subsection{Thư viện MFRC522}
-\subsubsection{File header}
-\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{cpp}{code/Mfrc522.h}
-\subsubsection{File thư viện}
-\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize, encoding=utf8]{cpp}{code/Mfrc522.cpp}
-\subsection{Thư viện LCD}
-\subsubsection{File header}
-\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/lcd.h}
-\subsubsection{File thư viện}
-\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/lcd.c}
-\subsection{File main}
-\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/main.c}
+%\appendix
+%\chapter*{Phụ lục}
+%\addcontentsline{toc}{chapter}{Phụ lục}
+%% IMPORTANT: These have to be here, cannot put above else it would mess up the content in mainmatter
+%\renewcommand{\thesection}{\Alph{section}}
+%%\setminted[c]{linenos, breaklines, breakanywhere, fontsize=\footnotesize]
+%\section{Source code của hệ thống}
+%\subsection{Thư viện MFRC522}
+%\subsubsection{File header}
+%\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{cpp}{code/Mfrc522.h}
+%\subsubsection{File thư viện}
+%\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize, encoding=utf8]{cpp}{code/Mfrc522.cpp}
+%\subsection{Thư viện LCD}
+%\subsubsection{File header}
+%\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/lcd.h}
+%\subsubsection{File thư viện}
+%\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/lcd.c}
+%\subsection{File main}
+%\inputminted[linenos=true, breaklines, breakanywhere, fontsize=\footnotesize]{c}{code/main.c}
 \end{document}
