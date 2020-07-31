@@ -8,12 +8,8 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@master
-            - name: Set PDF_NAME as env variable
-              # TODO: Change the name of file to match writing guidelines
-              run: echo "::set-env name=PDF_NAME::Thuc-tap-Rudo2204-192_$(date +'%Y-%m-%d')"
             - name: Compile LaTeX document
               uses: xu-cheng/latex-action@v2
               with:
                   root_file: main.tex # # TODO: Change this to compile the correct file(s)
                   latexmk_shell_escape: true
-                  post_compile: mv main.pdf $PDF_NAME.pdf
