@@ -10,7 +10,7 @@ main() {
 
     mv main.pdf $PDF_NAME.pdf
     # TODO: Change filename of files here to archive them correctly
-    7z a $ARCHIVE_NAME.7z code content/ frontmatter/ images/ main.tex uni.bib $PDF_NAME.pdf
+    7z a $ARCHIVE_NAME.7z code content/ frontmatter/ images/ main.tex uni.bib multido.* $PDF_NAME.pdf
 }
 
 main

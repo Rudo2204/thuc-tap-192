@@ -51,6 +51,7 @@ deploy:
     - ./*.pdf
     - ./*.7z
   on:
+    condition: $DEPLOY = never
     tags: true
   provider: releases
   skip_cleanup: true
