@@ -1,0 +1,63 @@
+name: Deploy document on tagged commit
+# Only tagged commit on master will get deployed
+on:
+    push:
+        branches:
+            - master
+        tags:
+            - 'v*' # matches v1.0, v2.15.23, ect.
+
+jobs:
+    deploy:
+        if: "!contains(github.event.head_commit.message, 'skip ci')"
+        runs-on: ubuntu-18.04
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@master
+            - name: Set PDF_NAME as env variable
+              # TODO: Change the name of file to match writing guidelines
+              run: echo "::set-env name=PDF_NAME::Thuc-tap-Rudo2204-192_$(date +'%Y-%m-%d')"
+            - name: Set ARCHIVE_NAME as env variable
+              # TODO: Change the name of file to match writing guidelines
+              run: echo "::set-env name=ARCHIVE_NAME::Thuc-tap-Rudo2204-192-material_$(date +'%Y-%m-%d')"
+            - name: Compile LaTeX document
+              uses: xu-cheng/latex-action@v2
+              with:
+                  root_file: main.tex # # TODO: Change this to compile the correct file(s)
+                  latexmk_shell_escape: true
+                  post_compile: mv main.pdf $PDF_NAME.pdf
+            - name: 7zip up the files
+              uses: edgarrc/action-7z@v1.0.4
+              # TODO: Change to package the right artifacts
+              with:
+                  args: 7z a $ARCHIVE_NAME.7z content/ frontmatter/ images/ main.tex uni.bib multido.* $PDF_NAME.pdf
+            - name: Create release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: ${{ github.ref }}
+                  draft: false
+                  prerelease: false
+            - name: Upload PDF file
+              id: upload-release-asset
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./$PDF_NAME.pdf
+                  asset_name: $PDF_NAME.pdf
+                  asset_content_type: application/pdf
+            - name: Upload Archive file
+              id: upload-release-asset
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: ./$ARCHIVE_NAME.pdf
+                  asset_name: $ARCHIVE_NAME.pdf
+                  asset_content_type: application/x-7z-compressed
